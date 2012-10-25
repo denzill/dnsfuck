@@ -14,6 +14,7 @@ $tables = array(
         'webarch' => 'text',
         'yc' => 'text',
         'glue' => 'text',
+        'gluedom' => 'text',
         'status' => 'text',
     ),
     'auc_domains' => array(
@@ -30,6 +31,7 @@ $tables = array(
         'webarch' => 'text',
         'yc' => 'text',
         'glue' => 'text',
+        'gluedom' => 'text',
         'status' => 'text',
     ),
     'basedates' => array(

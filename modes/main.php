@@ -30,6 +30,3 @@ $content->addHTML(makeFilterForm('exp_domains'), 'exp_domains');
 $content->addHTML(getTablePagination('exp_domains', 'domain'), 'exp_domains');
 $content->addHTML(getTableData('exp_domains', $content->getVal('sort', 'yandex_tci'), $content->getVal('page', 1), "Нет информации об освобождающихся доменах."), 'exp_domains');
 
-// Большая кнопка "обновить инфу"
-$content->addHTML("<br />" . $content->makeButton(array('primary', 'block'), 'ref_button', 'Обновить информацию', array('toggle' => 'modal', 'target' => '#domainsUpdate'), array('placement' => 'bottom', 'original-title' => 'Обновление базы освобождающихся и уже освободившихся доменов.')) . "<br />");
-

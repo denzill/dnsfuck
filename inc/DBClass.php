@@ -15,9 +15,11 @@ class DBClass {
     var $db;
     var $error_message;
     var $result;
+    var $dbfile;
     var $debug = false;
 
     public function __construct($dbfile) {
+        $this->dbfile = $dbfile;
         $this->db = $db = new SQLiteDatabase($dbfile);
         $this->initDB();
     }
@@ -43,7 +45,6 @@ class DBClass {
     public function query($sql) {
         error_reporting(0);
         try {
-            logger($sql);
             $this->result = $this->db->query($sql, SQLITE_ASSOC, $this->error_message);
             if ($this->db->lastError())
                 throw new Exception("ошибка при запросе");

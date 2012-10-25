@@ -1,0 +1,294 @@
+alter table auc_domains
+near "alter": syntax error
+#0 D:\cdsite\sites\dnsfuck\ajax\execSQL.php(21): DBClass->query('alter table auc...')
+#1 [internal function]: execSQL()
+#2 D:\cdsite\sites\dnsfuck\ajax.php(22): call_user_func('execSQL')
+#3 {main}
+alter table auc_domains insert add column  gluedom text
+near "alter": syntax error
+#0 D:\cdsite\sites\dnsfuck\ajax\execSQL.php(21): DBClass->query('alter table auc...')
+#1 [internal function]: execSQL()
+#2 D:\cdsite\sites\dnsfuck\ajax.php(22): call_user_func('execSQL')
+#3 {main}
+alter table auc_domains add column  gluedom text
+near "alter": syntax error
+#0 D:\cdsite\sites\dnsfuck\ajax\execSQL.php(21): DBClass->query('alter table auc...')
+#1 [internal function]: execSQL()
+#2 D:\cdsite\sites\dnsfuck\ajax.php(22): call_user_func('execSQL')
+#3 {main}
+file ru_expiring_list.gz update started
+file 3d_expiring_list.gz update started
+file ru_auction_list.gz update started
+file 3d_auction_list.gz update started
+DELETE FROM auc_domains WHERE status=deleted
+no such column: deleted
+#0 D:\cdsite\sites\dnsfuck\inc\DBClass.php(139): DBClass->query('DELETE FROM auc...')
+#1 D:\cdsite\sites\dnsfuck\ajax\updateDomains.php(82): DBClass->delete('auc_domains', Array)
+#2 [internal function]: updateDomains()
+#3 D:\cdsite\sites\dnsfuck\ajax.php(22): call_user_func('updateDomains')
+#4 {main}
+DELETE FROM exp_domains WHERE status=deleted
+no such column: deleted
+#0 D:\cdsite\sites\dnsfuck\inc\DBClass.php(139): DBClass->query('DELETE FROM exp...')
+#1 D:\cdsite\sites\dnsfuck\ajax\updateDomains.php(83): DBClass->delete('exp_domains', Array)
+#2 [internal function]: updateDomains()
+#3 D:\cdsite\sites\dnsfuck\ajax.php(22): call_user_func('updateDomains')
+#4 {main}
+select * from auc_domains 
+where glue=true
+order by yandex_tci desc
+no such column: true
+#0 D:\cdsite\sites\dnsfuck\ajax\execSQL.php(21): DBClass->query('select * from a...')
+#1 [internal function]: execSQL()
+#2 D:\cdsite\sites\dnsfuck\ajax.php(22): call_user_func('execSQL')
+#3 {main}
+file ru_expiring_list.gz update started
+file 3d_expiring_list.gz update started
+file ru_auction_list.gz update started
+file 3d_auction_list.gz update started
+DELETE FROM auc_domains WHERE status=deleted
+no such column: deleted
+#0 D:\cdsite\sites\dnsfuck\inc\DBClass.php(139): DBClass->query('DELETE FROM auc...')
+#1 D:\cdsite\sites\dnsfuck\ajax\updateDomains.php(82): DBClass->delete('auc_domains', Array)
+#2 [internal function]: updateDomains()
+#3 D:\cdsite\sites\dnsfuck\ajax.php(22): call_user_func('updateDomains')
+#4 {main}
+DELETE FROM exp_domains WHERE status=deleted
+no such column: deleted
+#0 D:\cdsite\sites\dnsfuck\inc\DBClass.php(139): DBClass->query('DELETE FROM exp...')
+#1 D:\cdsite\sites\dnsfuck\ajax\updateDomains.php(83): DBClass->delete('exp_domains', Array)
+#2 [internal function]: updateDomains()
+#3 D:\cdsite\sites\dnsfuck\ajax.php(22): call_user_func('updateDomains')
+#4 {main}
+file ru_expiring_list.gz update started
+file 3d_expiring_list.gz update started
+file ru_auction_list.gz update started
+file 3d_auction_list.gz update started
+DELETE FROM auc_domains WHERE status=deleted
+no such column: deleted
+#0 D:\cdsite\sites\dnsfuck\inc\DBClass.php(139): DBClass->query('DELETE FROM auc...')
+#1 D:\cdsite\sites\dnsfuck\ajax\updateDomains.php(82): DBClass->delete('auc_domains', Array)
+#2 [internal function]: updateDomains()
+#3 D:\cdsite\sites\dnsfuck\ajax.php(22): call_user_func('updateDomains')
+#4 {main}
+DELETE FROM exp_domains WHERE status=deleted
+no such column: deleted
+#0 D:\cdsite\sites\dnsfuck\inc\DBClass.php(139): DBClass->query('DELETE FROM exp...')
+#1 D:\cdsite\sites\dnsfuck\ajax\updateDomains.php(83): DBClass->delete('exp_domains', Array)
+#2 [internal function]: updateDomains()
+#3 D:\cdsite\sites\dnsfuck\ajax.php(22): call_user_func('updateDomains')
+#4 {main}
+array (
+  'action' => 'filterAPI',
+)
+array (
+)
+filterAPI: mode not defined
+array (
+  'action' => 'filterAPI',
+)
+array (
+)
+filterAPI: mode not defined
+array (
+  'action' => 'filterAPI',
+)
+array (
+)
+filterAPI: mode not defined
+array (
+  'action' => 'filterAPI',
+)
+array (
+)
+filterAPI: mode not defined
+array (
+  'action' => 'filterAPI',
+)
+array (
+)
+filterAPI: mode not defined
+array (
+  'action' => 'filterAPI',
+)
+array (
+)
+filterAPI: mode not defined
+array (
+  'action' => 'filterAPI',
+)
+array (
+  'table' => 'auc_domains',
+  'mode' => 'create',
+  'domain' => '',
+  'price' => '',
+  'bidders' => '',
+  'google_pr' => '',
+  'yandex_tci' => '',
+  'yc' => '',
+  'glue' => '',
+)
+create
+createFilter
+array (
+  'action' => 'filterAPI',
+)
+array (
+  'table' => 'auc_domains',
+  'mode' => 'create',
+  'domain' => '',
+  'price' => '',
+  'bidders' => '',
+  'google_pr' => '',
+  'yandex_tci' => '',
+  'yc' => '',
+  'glue' => 'ww',
+)
+create
+createFilter
+array (
+  'action' => 'filterAPI',
+)
+array (
+  'table' => 'auc_domains',
+  'mode' => 'create',
+  'domain' => '',
+  'price' => '',
+  'bidders' => '',
+  'google_pr' => '',
+  'yandex_tci' => '',
+  'yc' => '',
+  'glue' => 'ww',
+)
+create
+createFilter
+array (
+  'action' => 'filterAPI',
+)
+array (
+  'table' => 'auc_domains',
+  'mode' => 'create',
+  'domain' => '',
+  'price' => '',
+  'bidders' => '',
+  'google_pr' => '',
+  'yandex_tci' => '',
+  'yc' => '',
+  'glue' => '',
+)
+create
+createFilter
+array (
+  'action' => 'filterAPI',
+)
+array (
+  'table' => 'auc_domains',
+  'mode' => 'create',
+  'domain' => '',
+  'price' => '',
+  'bidders' => '',
+  'google_pr' => '',
+  'yandex_tci' => '',
+  'yc' => '',
+  'glue' => '',
+)
+create
+createFilter
+file ru_expiring_list.gz update started
+file 3d_expiring_list.gz update started
+file ru_auction_list.gz update started
+file 3d_auction_list.gz update started
+file ru_expiring_list.gz update started
+file 3d_expiring_list.gz update started
+file ru_auction_list.gz update started
+file 3d_auction_list.gz update started
+file ru_expiring_list.gz update started
+file D:\cdsite\sites\dnsfuck/temp/ru_expiring_list.gz already updated
+file 3d_expiring_list.gz update started
+file ru_auction_list.gz update started
+file D:\cdsite\sites\dnsfuck/temp/ru_auction_list.gz already updated
+file 3d_auction_list.gz update started
+file D:\cdsite\sites\dnsfuck/temp/3d_auction_list.gz already updated
+file ru_expiring_list.gz update started
+file D:\cdsite\sites\dnsfuck/temp/ru_expiring_list.gz already updated
+file 3d_expiring_list.gz update started
+file D:\cdsite\sites\dnsfuck/temp/3d_expiring_list.gz already updated
+file ru_auction_list.gz update started
+file 3d_auction_list.gz update started
+file ru_expiring_list.gz update started
+file 3d_expiring_list.gz update started
+file ru_auction_list.gz update started
+file 3d_auction_list.gz update started
+file ru_expiring_list.gz update started
+file 3d_expiring_list.gz update started
+file ru_auction_list.gz update started
+file 3d_auction_list.gz update started
+file ru_expiring_list.gz update started
+file 3d_expiring_list.gz update started
+file ru_auction_list.gz update started
+file 3d_auction_list.gz update started
+file ru_expiring_list.gz update started
+file D:\cdsite\sites\dnsfuck/temp/ru_expiring_list.gz already updated
+file 3d_expiring_list.gz update started
+file ru_auction_list.gz update started
+file 3d_auction_list.gz update started
+file ru_expiring_list.gz update started
+file D:\cdsite\sites\dnsfuck/temp/ru_expiring_list.gz already updated
+file 3d_expiring_list.gz update started
+file ru_auction_list.gz update started
+file 3d_auction_list.gz update started
+file ru_expiring_list.gz update started
+file D:\cdsite\sites\dnsfuck/temp/ru_expiring_list.gz already updated
+file 3d_expiring_list.gz update started
+file ru_auction_list.gz update started
+file 3d_auction_list.gz update started
+file ru_expiring_list.gz update started
+file D:\cdsite\sites\dnsfuck/temp/ru_expiring_list.gz already updated
+file 3d_expiring_list.gz update started
+file ru_auction_list.gz update started
+file 3d_auction_list.gz update started
+file ru_expiring_list.gz update started
+file D:\cdsite\sites\dnsfuck/temp/ru_expiring_list.gz already updated
+file 3d_expiring_list.gz update started
+file ru_auction_list.gz update started
+file 3d_auction_list.gz update started
+file ru_expiring_list.gz update started
+file D:\cdsite\sites\dnsfuck/temp/ru_expiring_list.gz already updated
+file 3d_expiring_list.gz update started
+file ru_auction_list.gz update started
+file 3d_auction_list.gz update started
+file ru_expiring_list.gz update started
+file D:\cdsite\sites\dnsfuck/temp/ru_expiring_list.gz already updated
+file 3d_expiring_list.gz update started
+file ru_auction_list.gz update started
+file 3d_auction_list.gz update started
+file ru_expiring_list.gz update started
+file D:\cdsite\sites\dnsfuck/temp/ru_expiring_list.gz already updated
+file 3d_expiring_list.gz update started
+file ru_auction_list.gz update started
+file 3d_auction_list.gz update started
+file ru_expiring_list.gz update started
+file D:\cdsite\sites\dnsfuck/temp/ru_expiring_list.gz already updated
+file 3d_expiring_list.gz update started
+file ru_auction_list.gz update started
+file 3d_auction_list.gz update started
+file ru_expiring_list.gz update started
+file D:\cdsite\sites\dnsfuck/temp/ru_expiring_list.gz already updated
+file 3d_expiring_list.gz update started
+file ru_auction_list.gz update started
+file 3d_auction_list.gz update started
+file ru_expiring_list.gz update started
+file D:\cdsite\sites\dnsfuck/temp/ru_expiring_list.gz already updated
+file 3d_expiring_list.gz update started
+file ru_auction_list.gz update started
+file 3d_auction_list.gz update started
+file ru_expiring_list.gz update started
+file 3d_expiring_list.gz update started
+file ru_auction_list.gz update started
+file 3d_auction_list.gz update started
+file ru_expiring_list.gz update started
+file D:\cdsite\sites\dnsfuck/temp/ru_expiring_list.gz already updated
+file 3d_expiring_list.gz update started
+file D:\cdsite\sites\dnsfuck/temp/3d_expiring_list.gz already updated
+file ru_auction_list.gz update started
+file 3d_auction_list.gz update started

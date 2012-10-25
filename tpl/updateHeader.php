@@ -60,26 +60,3 @@ $date = time();
         </div>
 
         <div class="container">
-            <br />
-            <button id='ref_button' type='button' class='btn btn-primary btn-block' data-href='index.php?mode=update' rel='tooltip' data-placement='bottom' data-original-title='Обновление базы освобождающихся и уже освободившихся доменов.'>Обновить информацию</button>
-            <br />
-            <div id='debug'></div>
-            <div class="tabbable">
-                <ul class="nav nav-tabs" id="domainTabs">
-                    <li class="active"><a href="#auc_domains" data-toggle="tab">Освободившиеся</a></li>
-                    <li><a href="#exp_domains" data-toggle="tab">Освобождающиеся</a></li>
-                </ul>
-                <div class="tab-content">
-                    <?= $content->getTab('auc_domains') ?>
-                    <?= $content->getTab('exp_domains') ?>
-                </div>
-            </div>
-        </div> <!-- /container -->
-
-        <!-- Le javascript ================================================= -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script src="js/jquery.min.js?<?= $date ?>"></script>
-        <script src="js/bootstrap.min.js?<?= $date ?>"></script>
-        <script src="js/main.js?<?= $date ?>"></script>
-    </body>
-</html>

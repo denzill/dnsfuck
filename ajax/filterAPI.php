@@ -14,6 +14,16 @@ function filterAPI() {
     global $IP, $databasefile, $db;
 
     $db = new DBClass("{$IP}/db/{$databasefile}");
+    $content = new ContentClass();
+    $mode = $content->getVal('mode', '');
+    if ($mode != '') {
+        if (is_callable($mode . "Filter")) {
+            logger($mode . "Filter");
+//            $this->$mode();
+        }
+    } else {
+        logger(__METHOD__ . ": mode not defined");
+    }
 }
 
 function createFilter($param) {

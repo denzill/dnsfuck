@@ -24,18 +24,37 @@ function updateYACA() {
             $url = "http://bar-navig.yandex.ru/u?ver=2&show=16&url=http://{$domain}";
             $xml = simplexml_load_file($url);
             if (($xml->url->attributes()->domain == $domain) || ($xml->url->attributes()->domain == "www.{$domain}")) {
-                $update['glue'] = "'{$row->domain}'";
+                // Домен не склеен
+                $update['glue'] = "'false'";
             } else {
-                $update['glue'] = "'{$xml->url->attributes()->domain}'";
+                // Домен склеен
+                $update['glue'] = "'true'";
+                $update['gluedom'] = "'{$xml->url->attributes()->domain}'";
             }
-            $textinfo = "";
-            foreach ($xml->textinfo as $value) {
-                $textinfo .= $value;
-            }
-            $update['yc'] = "'" . str_replace("\n", "<br />", trim($textinfo)) . "'";
+
+            $textinfo = makeTextInfo($xml);
+            $update['yc'] = "'" . str_replace("\n", "<br />", $textinfo) . "'";
             $db->update($table, $update, array('domain' => "'{$row->domain}'"));
         }
     }
     $result = array('count' => $count);
     return $result;
+}
+
+function makeTextInfo($xml) {
+    $textinfo = '';
+
+    foreach ($xml->textinfo as $value) {
+        $textinfo .= $value;
+    }
+    $textinfo = trim($textinfo);
+    if ($textinfo == '') {
+        return '-';
+    }
+    $infoArray = explode("\n", $textinfo);
+    foreach ($infoArray as $num => $value) {
+        list ($tag, $val) = explode(': ', $value);
+        $infoArray[$num] = "<b>{$tag}</b>: {$val}";
+    }
+    return implode("<br />", $infoArray);
 }

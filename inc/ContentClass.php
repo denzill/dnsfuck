@@ -21,14 +21,16 @@ class ContentClass {
     }
 
     public function execute() {
-        global $IP, $db;
+        global $IP;
 
         $content = $this;
         $this->mode = $this->getVal('mode', 'main');
         $modefile = "{$IP}/modes/{$this->mode}.php";
         $template = "{$IP}/tpl/{$this->mode}.php";
-        if ((file_exists($modefile)) && (file_exists($template))) {
+        if (file_exists($modefile)) {
             include $modefile;
+        }
+        if (file_exists($template)) {
             include $template;
         }
     }
@@ -141,14 +143,22 @@ class ContentClass {
     function makeTableRow($row) {
         global $allowed_fields;
 
-        if ($row->domain != $row->glue) {
+        // Яндекс.Каталог
+        if ($row->yc != '-') {
+            $row->yc = "<a href='http://yaca.yandex.by/yca/cy/ch/{$row->domain}' target='_blank' class='yaca_tooltip' rel='tooltip' data-placement='top' data-original-title='{$row->yc}'>Каталог</a>";
+        } else {
+            $row->yc = 'Не описан';
+        }
+        // Проверка на клей
+        if ($row->glue == 'true') {
             $class = 'error';
+            $row->glue = "<a href='#' class='a_tooltip' rel='tooltip' data-placement='left' data-original-title='Приклеен к домену:{$row->gluedom}.'>клей</a>";
         } else {
             $class = '';
+            $row->glue = '';
         }
         $rows = "<tr class='{$class}'>\n";
         foreach (array_keys(get_object_vars($row)) as $field) {
-            logger($row);
             if (in_array($field, $allowed_fields)) {
                 $rows .= "<td>{$row->$field}</td>\n";
             }

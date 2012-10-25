@@ -54,7 +54,7 @@ function getTablePagination($table, $countField) {
     if (($count % $results) > 0) {
         $pages++;
     }
-    $html .="<div id='{$table}_pagination' sortdir='{$sortdir}' sort='{$sort}' class='pagination pagination-centered'>\n<ul table='{$table}' page='{$current}'>\n";
+    $html .="<div id='{$table}_pagination' sortdir='{$sortdir}' sort='{$sort}' class='pagination pagination-centered' page='{$current}'>\n<ul table='{$table}'>\n";
     $counter = 1;
     while ($pages >= $counter) {
         if ($counter == $current) {
@@ -64,21 +64,25 @@ function getTablePagination($table, $countField) {
         }
         $html.="<li class='{$class}'><a href='#' page='{$counter}'>{$counter}</a></li>";
         $counter++;
+        if ($counter > 10){
+            break;
+        }
     }
 //    <li><a href='#'>Next</a></li>
-    $html .="</ul>\n</div>\n";
+    $html .="</ul>\n</div><br>\n";
     return $html;
 }
 
 function makeFilterForm($table) {
     global $db, $table_headers;
 
-    $html = "<form id='{$table}_form'>";
+    $html = "<form class='form-inline' id='{$table}_form'>\n<input type='hidden' value='{$table}' name='table'>\n<input type='hidden' value='create' name='mode'>";
+    $html .= "  <legend>Фильтр</legend>\n";
     $desc = $db->describe($table);
     foreach ($desc as $name => $type) {
-        $html .= "<input class='span2' style='margin: 0 auto;' type='text' name='{$name}' dbtype='$type' placeholder='" . (isset($table_headers[$name]) ? $table_headers[$name] : $name) . "'>";
+        $html .= "&nbsp;<input class='input-small' type='text' name='{$name}' dbtype='$type' placeholder='" . (isset($table_headers[$name]) ? $table_headers[$name] : $name) . "'>";
     }
-    $html .= ContentClass::makeButton(array('filter', 'primary'), '', 'Применить', array(), array('placement' => 'top', 'original-title' => 'Фильтр откроется в новой вкладке.'));
+    $html .= "&nbsp;" . ContentClass::makeButton(array('filter', 'primary'), '', 'Применить', array(), array('placement' => 'top', 'original-title' => 'Фильтр откроется в новой вкладке.'));
     $html .= "</form>";
     return $html;
 }

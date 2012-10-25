@@ -27,7 +27,6 @@ $date = time();
         <style>
             body {
                 padding-top: 40px; /* 60px to make the container go all the way to the bottom of the topbar */
-                overflow: scroll;
             }
         </style>
         <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
@@ -51,8 +50,8 @@ $date = time();
                     <a class="brand" href="#">DNSFUCK</a>
                     <div class="nav-collapse collapse">
                         <ul class="nav">
-                            <li class="active"><a href="?mode=main">Списки доменов</a></li>
-                            <li><a href="?mode=dbedit">База данных</a></li>
+                            <li><a href="?mode=main">Списки доменов</a></li>
+                            <li class="active"><a href="?mode=dbedit">База данных</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>
@@ -60,19 +59,13 @@ $date = time();
         </div>
 
         <div class="container">
-            <br />
-            <button id='ref_button' type='button' class='btn btn-primary btn-block' data-href='index.php?mode=update' rel='tooltip' data-placement='bottom' data-original-title='Обновление базы освобождающихся и уже освободившихся доменов.'>Обновить информацию</button>
-            <br />
-            <div id='debug'></div>
-            <div class="tabbable">
-                <ul class="nav nav-tabs" id="domainTabs">
-                    <li class="active"><a href="#auc_domains" data-toggle="tab">Освободившиеся</a></li>
-                    <li><a href="#exp_domains" data-toggle="tab">Освобождающиеся</a></li>
-                </ul>
-                <div class="tab-content">
-                    <?= $content->getTab('auc_domains') ?>
-                    <?= $content->getTab('exp_domains') ?>
-                </div>
+            <form class='form-horizontal'>
+                <legend>Редактирование базы </legend>
+                <textarea name='sql' id='sql_text' class='span12' rows='6' placeholder="SQL запрос"></textarea>
+                <span class="help-block">Сверху пишем запрос - снизу смотрим результат.</span>
+                <button id='btn_submit' type="submit" class="btn btn-primary">Выполнить</button>
+            </form>
+            <div id='result'>
             </div>
         </div> <!-- /container -->
 
@@ -80,6 +73,6 @@ $date = time();
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="js/jquery.min.js?<?= $date ?>"></script>
         <script src="js/bootstrap.min.js?<?= $date ?>"></script>
-        <script src="js/main.js?<?= $date ?>"></script>
+        <script src="js/dbedit.js?<?= $date ?>"></script>
     </body>
 </html>
