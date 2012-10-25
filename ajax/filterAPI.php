@@ -20,7 +20,7 @@ function filterAPI() {
         if (is_callable($mode . "Filter")) {
             logger($mode . "Filter");
 //            $this->$mode();
-        }
+}
     } else {
         logger(__METHOD__ . ": mode not defined");
     }

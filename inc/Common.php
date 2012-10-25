@@ -66,7 +66,7 @@ function getTablePagination($table, $countField) {
         $counter++;
         if ($counter > 10){
             break;
-        }
+    }
     }
 //    <li><a href='#'>Next</a></li>
     $html .="</ul>\n</div><br>\n";

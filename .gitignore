@@ -1,1 +1,5 @@
 /db/dnsfuck.db
+/temp/ru_expiring_list.gz
+/temp/3d_auction_list.gz
+/temp/ru_auction_list.gz
+/temp/3d_expiring_list.gz
