@@ -22,10 +22,10 @@ function logger($string) {
 }
 
 function getTableData($tablename, $sortField, $page = 1, $emptyMessage = '') {
-    global $content, $db, $results;
+    global $content, $db, $results, $crapFilter;
 
     $start = ($page - 1) * $results;
-    $db_res = $db->select($tablename, '*', '', "order by {$sortField} desc LIMIT {$start},{$results} ");
+    $db_res = $db->select($tablename, '*', $crapFilter, "order by {$sortField} desc LIMIT {$start},{$results} ");
     if ($db_res->numRows() == 0) { // Записей нет
         $html = $content->makeAlert('Внимание!', $emptyMessage);
     } else {
@@ -43,9 +43,9 @@ function getTableData($tablename, $sortField, $page = 1, $emptyMessage = '') {
 }
 
 function getTablePagination($table, $countField) {
-    global $db, $results, $content;
+    global $db, $results, $content, $crapFilter;
 
-    $count = $db->countRecords($table, $countField);
+    $count = $db->countRecords($table, $countField, $crapFilter);
     $html = "Всего доменов: {$count}<br />";
     $pages = floor($count / $results);
     $current = $content->getVal('page', 1);
@@ -55,20 +55,18 @@ function getTablePagination($table, $countField) {
         $pages++;
     }
     $html .="<div id='{$table}_pagination' sortdir='{$sortdir}' sort='{$sort}' class='pagination pagination-centered' page='{$current}'>\n<ul table='{$table}'>\n";
-    $counter = 1;
-    while ($pages >= $counter) {
+    $html.="<li" . ($current == 1 ? " class='active'" : "") . "><a href='#'>Prev</a></li>";
+    $counter = 0;
+    while ($pages > $counter) {
+        $counter++;
         if ($counter == $current) {
             $class = 'active';
         } else {
             $class = '';
         }
         $html.="<li class='{$class}'><a href='#' page='{$counter}'>{$counter}</a></li>";
-        $counter++;
-        if ($counter > 10){
-            break;
     }
-    }
-//    <li><a href='#'>Next</a></li>
+    $html.="<li" . ($current == $counter ? " class='active'" : "") . "><a href='#'>Next</a></li>";
     $html .="</ul>\n</div><br>\n";
     return $html;
 }

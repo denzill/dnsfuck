@@ -11,7 +11,7 @@
  * @version $Revision: $
  */
 function getData() {
-    global $db, $results, $IP, $databasefile;
+    global $db, $results, $IP, $databasefile, $crapFilter;
 
     $content = new ContentClass();
     $db = new DBClass("{$IP}/db/{$databasefile}");
@@ -21,7 +21,7 @@ function getData() {
     $sortdir = $content->getVal('sortdir', 'desc');
     if ($table !== null) {
         $start = ($page - 1) * $results;
-        $db_res = $db->select($table, '*', '', "order by {$sort} {$sortdir} LIMIT {$start},{$results} ");
+        $db_res = $db->select($table, '*', $crapFilter, "order by {$sort} {$sortdir} LIMIT {$start},{$results} ");
         if ($db_res->numRows() == 0) { // Записей нет
             $html = $content->makeAlert('Внимание!', 'Ничего не найдено');
         } else {

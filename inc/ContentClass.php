@@ -144,10 +144,12 @@ class ContentClass {
         global $allowed_fields;
 
         // Яндекс.Каталог
-        if ($row->yc != '-') {
-            $row->yc = "<a href='http://yaca.yandex.by/yca/cy/ch/{$row->domain}' target='_blank' class='yaca_tooltip' rel='tooltip' data-placement='top' data-original-title='{$row->yc}'>Каталог</a>";
-        } else {
+        if ($row->yc == null) {
+            $row->yc = '?';
+        } elseif ($row->yc == '-') {
             $row->yc = 'Не описан';
+        } else {
+            $row->yc = "<a href='http://yaca.yandex.by/yca/cy/ch/{$row->domain}' target='_blank' class='yaca_tooltip' rel='tooltip' data-placement='top' data-original-title='{$row->yc}'>Каталог</a>";
         }
         // Проверка на клей
         if ($row->glue == 'true') {

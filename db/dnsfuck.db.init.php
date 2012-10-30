@@ -36,9 +36,10 @@ $tables = array(
     ),
     'basedates' => array(
         'file' => 'text',
-        'date' => 'text',
+        'checksum' => 'text',
     ),
     'filters' => array(
+        'id' => 'int primary key',
         'user' => 'text',
         'name' => 'text',
         'json' => 'text',

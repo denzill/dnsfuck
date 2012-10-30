@@ -114,11 +114,12 @@ $(function () {
                 success : function (r) {
                     if (r.count == 0){
                         clearInterval(uYacaInterval);
+                    } else{
+//                        $("#alert").alert();
                     }
                     updating = false;
                 },
                 error : function(r){
-                    alert ('Возникла ошибка updateYACA: ' + r.status_text);
                     clearInterval(uYacaInterval);
                 }
             });

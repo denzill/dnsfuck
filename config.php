@@ -12,7 +12,7 @@
  */
 $IP = dirname(__FILE__);
 $databasefile = 'dnsfuck.db';
-$results = 50;
+$results = 100;
 
 $expiringDomains = array(
     'http://auction.nic.ru/downloads/ru_expiring_list.gz',
@@ -47,5 +47,14 @@ $filter_fields = array(
     'google_pr',
     'yandex_tci',
     'yc',
-    'glue',
 );
+
+/* Фильтр говна 
+ * (SQL WHERE condition)
+ * ТиЦ + ЯК
+ * ТиЦ без ЯК
+ * ЯК без ТиЦ
+ */
+//$crapFilter = "(glue is not null and yc is not null and yc!='-') OR (glue!='true' and glue is not null and yandex_tci!='?' and yandex_tci!='<10')";
+//$crapFilter = "(glue='false' and yc is not null and yc!='-') OR (glue!='true' and glue is not null and yandex_tci!='?' and yandex_tci!='<10')";
+$crapFilter = "(glue='false' and yc!='-') OR (glue='false' and yandex_tci>1)";

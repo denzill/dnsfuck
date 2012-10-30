@@ -1,7 +1,7 @@
 <?php
 
 /**
- * <Create your comment here>
+ * <Работа с базой данных>
  *
  * $Revision: $
  * $Id: $
@@ -18,6 +18,10 @@ class DBClass {
     var $dbfile;
     var $debug = false;
 
+    /**
+     * Конструктор
+     * @param type $dbfile Полный путь к файлу базы данных
+     */
     public function __construct($dbfile) {
         $this->dbfile = $dbfile;
         $this->db = $db = new SQLiteDatabase($dbfile);
@@ -25,11 +29,10 @@ class DBClass {
     }
 
     public function initDB() {
-        global $IP;
         $struct = FALSE;
 
-        if (file_exists("{$IP}/db/db.init.php")) {
-            $struct = include "{$IP}/db/db.init.php";
+        if (file_exists("{$this->dbfile}.init.php")) {
+            $struct = include "{$this->dbfile}.init.php";
         }
         if (is_array($struct)) {
             foreach ($struct as $table => $defs) {
@@ -43,21 +46,22 @@ class DBClass {
     }
 
     public function query($sql) {
+        logger($sql);
         error_reporting(0);
         try {
             $this->result = $this->db->query($sql, SQLITE_ASSOC, $this->error_message);
             if ($this->db->lastError())
                 throw new Exception("ошибка при запросе");
         } catch (Exception $exc) {
-            logger($sql);
             logger($this->error_message);
             logger($exc->getTraceAsString());
         }
         return $this->result;
     }
 
-    public function countRecords($table, $countField = '*') {
-        $res = $this->query("SELECT count({$countField}) as count FROM {$table}");
+    public function countRecords($table, $countField = '*', $conds='') {
+        $sql = "SELECT count({$countField}) as count FROM {$table} ". $this->makeConditions($conds);
+        $res = $this->query($sql);
         $row = $res->fetchObject();
         return $row->count;
     }
@@ -142,7 +146,7 @@ class DBClass {
     }
 
     public function drop($sql) {
-
+        
     }
 
     public function beginTransaction() {

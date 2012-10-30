@@ -31,7 +31,6 @@ function updateYACA() {
                 $update['glue'] = "'true'";
                 $update['gluedom'] = "'{$xml->url->attributes()->domain}'";
             }
-
             $textinfo = makeTextInfo($xml);
             $update['yc'] = "'" . str_replace("\n", "<br />", $textinfo) . "'";
             $db->update($table, $update, array('domain' => "'{$row->domain}'"));

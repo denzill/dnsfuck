@@ -12,6 +12,7 @@
  */
 global $expiringDomains, $auctionDomains, $IP, $db, $databasefile;
 
+$start = time();
 include ("{$IP}/tpl/updateHeader.php");
 copy("{$IP}/db/{$databasefile}", "{$IP}/db/{$databasefile}.new");
 $db = new DBClass("{$IP}/db/{$databasefile}.new");
@@ -21,8 +22,8 @@ $expiringDomains = updateArray($expiringDomains);
 $auctionDomains = updateArray($auctionDomains);
 $filelist = array_merge($expiringDomains, $auctionDomains);
 echo ("Скачиваем файлы<br>");
+// Download all files
 foreach ($filelist as $file => $url) {
-    // Download all files
     echo (basename($url) . ": ");
     flush();
     $filename = "{$IP}/temp/" . basename($url);
@@ -49,7 +50,7 @@ foreach ($filelist as $filename => $file) {
     echo ("{$filename}: ");
     $gz = gzopen($file, 'r');
     $basedate = trim(gzgets($gz, 4096));
-    if (checkUpdated($file, $basedate)) {
+    if (checkUpdated($file)) {
         logger("file {$file} already updated\n");
         echo ("уже обновлен.<br>\n");
         continue;
@@ -92,12 +93,26 @@ if (copy("{$IP}/db/{$databasefile}.new", "{$IP}/db/{$databasefile}") !== true) {
 } else {
     echo ("Акакей.<br>\n");
 }
+$duration = time() - $start;
+$sec = $duration % 60;
+$min = floor($duration / 60);
+echo ("Время выполнения: {$min} минут {$sec} секунд<br>\n");
+//echo ("Время выполнения: {$duration} секунд<br>\n");
 flush();
 include ("{$IP}/tpl/updateFooter.php");
+/* END */
 
-function checkUpdated($file, $date) {
+/**
+ * 
+ * @global DBClass $db
+ * @param type $file
+ * @param type $date
+ * @return boolean
+ */
+function checkUpdated($file) {
     global $db;
-    $res = $db->select('basedates', '*', "file='{$file}' and date='{$date}'");
+    $md5 = md5_file($file);
+    $res = $db->select('basedates', '*', "file='" . basename($file) . "' and checksum='{$md5}'");
     if ($res->numRows() > 0) {
         return true;
     } else {
@@ -113,6 +128,16 @@ function updateArray($array) {
     return $updated;
 }
 
+function getYandexTCI($value) {
+    if ($value == '?') {
+        return "'0'";
+    } elseif ($value == '<10') {
+        return "'1'";
+    } else {
+        return "'{$value}'";
+    }
+}
+
 function insertExpDomain($domain) {
     global $db;
     $values = array(
@@ -123,7 +148,7 @@ function insertExpDomain($domain) {
         'created' => "'{$domain[4]}'",
         'tlds' => "'{$domain[5]}'",
         'google_pr' => "'{$domain[6]}'",
-        'yandex_tci' => "'{$domain[7]}'",
+        'yandex_tci' => getYandexTCI($domain[7]),
         'alexa' => "'{$domain[8]}'",
         'webarch' => "'{$domain[9]}'",
         'status' => "'updated'",
@@ -145,7 +170,7 @@ function insertAucDomain($domain) {
         'created' => "'{$domain[4]}'",
         'tlds' => "'{$domain[5]}'",
         'google_pr' => "'{$domain[6]}'",
-        'yandex_tci' => "'{$domain[7]}'",
+        'yandex_tci' => getYandexTCI($domain[7]),
         'alexa' => "'{$domain[8]}'",
         'webarch' => "'{$domain[9]}'",
         'status' => "'updated'",
@@ -155,26 +180,12 @@ function insertAucDomain($domain) {
     }
 }
 
-function setUpdated($file, $date) {
+function setUpdated($file) {
     global $db;
-    $changes = $db->update('basedates', array('date' => "'{$date}'"), array('file' => "'{$file}'"));
+
+    $md5 = md5_file($file);
+    $changes = $db->update('basedates', array('checksum' => "'{$md5}'"), array('file' => "'" . basename($file) . "'"));
     if ($changes == 0) {
-        $db->insert('basedates', array('date' => "'{$date}'", 'file' => "'{$file}'"));
+        $db->insert('basedates', array('checksum' => "'{$md5}'", 'file' => "'" . basename($file) . "'"));
     }
-}
-
-/**
- * Фильтр говна
- * @param type $param
- * @return boolean true - если домен говно и false если домен гут
- */
-function crapFilter($param) {
-    global $db;
-
-
-//    if (($param[6] == '?') || ($param[7] == '<10') || ($param[8] == '-') || ($param[9] == '-')) {
-    if (($param[7] == '<10') || (!intval($param[7]))) {
-        return true;
-    }
-    return false;
 }
